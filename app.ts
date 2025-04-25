@@ -1,43 +1,46 @@
-// MASHQ 1: Foydalanuvchi ma'lumotlarini saqlash
-type Foydalanuvchi = {
+// MASHQ 1
+
+type User = {
   id: number;
   ism: string;
   email: string;
   yosh: number;
 };
 
-const foydalanuvchi: Foydalanuvchi = {
+const user1: User = {
   id: 1,
-  ism: "Ali",
-  email: "ali@example.com",
+  ism: "Alijon",
+  email: "alijoh@example.com",
   yosh: 25,
 };
-console.log("MASHQ 1:", foydalanuvchi);
+console.log(user1);
 
-// MASHQ 2: Mahsulot katalogi
-type Mahsulot = {
+// MASHQ 2
+
+type Product = {
   nomi: string;
   narxi: number;
   mavjud: boolean;
 };
 
-const telefon: Mahsulot = {
-  nomi: "Samsung Galaxy",
-  narxi: 500,
+const phone: Product = {
+  nomi: "Samsung Galaxy A55",
+  narxi: 1200,
   mavjud: true,
 };
 
-const laptop: Mahsulot = {
-  nomi: "Dell XPS",
+const notebook: Product = {
+  nomi: "Mac Book Air 2",
   narxi: 1200,
   mavjud: false,
 };
-console.log("MASHQ 2:", telefon, laptop);
+console.log(phone, notebook);
 
-// MASHQ 3: Qoʻshish, ayirish, koʻpaytirish, boʻlish
+// MASHQ 3
+
 type Amal = "qoshish" | "ayirish" | "kopaytirish" | "bolish";
 
-function hisoblash(amal: Amal, a: number, b: number): number {
+function counting(amal: Amal, a: number, b: number): number {
   switch (amal) {
     case "qoshish":
       return a + b;
@@ -49,41 +52,42 @@ function hisoblash(amal: Amal, a: number, b: number): number {
       return a / b;
   }
 }
-console.log("MASHQ 3:");
-console.log("Qo‘shish:", hisoblash("qoshish", 5, 3));
-console.log("Ayirish:", hisoblash("ayirish", 5, 3));
-console.log("Ko‘paytirish:", hisoblash("kopaytirish", 5, 3));
-console.log("Bo‘lish:", hisoblash("bolish", 6, 2));
+console.log(counting("qoshish", 5, 3));
+console.log(counting("ayirish", 5, 3));
+console.log(counting("kopaytirish", 5, 3));
+console.log(counting("bolish", 6, 2));
 
-// MASHQ 4: Talabalar ro'yxati
-type Talaba = {
+// MASHQ 4
+
+type Student = {
   id: number;
   ism: string;
   kurs: number;
 };
 
-const talabalarRoyxati: Talaba[] = [
-  { id: 1, ism: "Aziz", kurs: 2 },
-  { id: 2, ism: "Malika", kurs: 1 },
+const studentLists: Student[] = [
+  { id: 1, ism: "Asadbek", kurs: 2 },
+  { id: 2, ism: "Mirkomil", kurs: 1 },
   { id: 3, ism: "Sardor", kurs: 3 },
 ];
 
-function talabaniTop(id: number): Talaba | undefined {
-  return talabalarRoyxati.find((t) => t.id === id);
+function findStudent(id: number): Student | undefined {
+  return studentLists.find((t) => t.id === id);
 }
-console.log("MASHQ 4:", talabaniTop(2));
+console.log(findStudent(2));
 
-// MASHQ 5: Foydalanuvchi statusi
+// MASHQ 5
+
 type Status = "faol" | "nofaol" | "blok";
 
-type FoydalanuvchiStatus = {
+type UserStatus = {
   id: number;
   ism: string;
   status: Status;
 };
 
-function statusniTekshir(foydalanuvchi: FoydalanuvchiStatus): string {
-  switch (foydalanuvchi.status) {
+function checkStatus(user: UserStatus): string {
+  switch (user.status) {
     case "faol":
       return "Foydalanuvchi faol";
     case "nofaol":
@@ -92,49 +96,55 @@ function statusniTekshir(foydalanuvchi: FoydalanuvchiStatus): string {
       return "Foydalanuvchi bloklangan";
   }
 }
-console.log("MASHQ 5:");
-console.log(statusniTekshir({ id: 1, ism: "Ali", status: "faol" }));
-console.log(statusniTekshir({ id: 2, ism: "Vali", status: "blok" }));
+console.log(checkStatus({ id: 1, ism: "Azamat", status: "faol" }));
+console.log(checkStatus({ id: 2, ism: "Muhhamadsodiq", status: "blok" }));
 
-// MASHQ 6: Xabar yuborish
-type XabarTuri = "email" | "sms" | "telegram";
+// MASHQ 6
 
-function xabarYuborish(turi: XabarTuri, kontakt: string, matn: string): string {
-  return `${turi.toUpperCase()} orqali xabar yuborildi: ${matn} (Kontakt: ${kontakt})`;
+type typeMessage = "email" | "sms" | "telegram";
+
+function sendMessage(
+  typ: typeMessage,
+  contact: string,
+  message: string
+): string {
+  return `${typ} orqali xabar yuborildi: ${message} (Kontakt: ${contact})`;
 }
-console.log("MASHQ 6:");
-console.log(xabarYuborish("email", "ali@mail.com", "Salom!"));
-console.log(xabarYuborish("sms", "+998901234567", "Assalomu alaykum!"));
+console.log(sendMessage("email", "ali@mail.com", "Salom!"));
+console.log(sendMessage("sms", "+998901234567", "Assalomu alaykum!"));
 
-// MASHQ 7: Savatcha
-type MahsulotItem = {
+// MASHQ 7
+
+type ProductItem = {
   id: number;
   nomi: string;
-  narxi: number;
+  price: number;
 };
 
-const savatchaItemlari: MahsulotItem[] = [
-  { id: 1, nomi: "Telefon", narxi: 500 },
-  { id: 2, nomi: "Quloqchin", narxi: 50 },
-  { id: 3, nomi: "Zaryadlovchi", narxi: 20 },
+const boxItems: ProductItem[] = [
+  { id: 1, nomi: "Telefon", price: 500 },
+  { id: 2, nomi: "Naushniuk", price: 50 },
+  { id: 3, nomi: "Zaryadnik", price: 20 },
 ];
 
-function umumiyNarx(items: MahsulotItem[]): number {
-  return items.reduce((sum, item) => sum + item.narxi, 0);
+function sum(items: ProductItem[]): number {
+  return items.reduce((sum, item) => sum + item.price, 0);
 }
-console.log("MASHQ 7:", "Umumiy narx:", umumiyNarx(savatchaItemlari));
+console.log("Summ", sum(boxItems));
 
-// MASHQ 8: To'lov usullari
-type TolovUsuli = "naqd" | "karta" | "click";
+// MASHQ 8
 
-function tolovQilish(usul: TolovUsuli, summa: number): string {
-  return `${usul.toUpperCase()} orqali ${summa} so'm to'landi`;
+type listPay = "naqd" | "karta" | "click";
+
+function tolovQilish(usul: listPay, summa: number): string {
+  return `${usul} orqali ${summa} so'm to'landi`;
 }
-console.log("MASHQ 8:");
+
 console.log(tolovQilish("naqd", 100000));
 console.log(tolovQilish("click", 250000));
 
-// MASHQ 9: Account holati
+// MASHQ 9
+
 type Account = {
   id: number;
   login: string;
@@ -142,36 +152,45 @@ type Account = {
   active: boolean;
 };
 
-function accountniTekshir(account: Account): string {
+function checkAccount(account: Account): string {
   return account.active ? "Account faol" : "Account faol emas";
 }
-console.log("MASHQ 9:");
 console.log(
-  accountniTekshir({ id: 1, login: "ali123", password: "1234", active: true })
+  checkAccount({
+    id: 1,
+    login: "azamat123",
+    password: "jambatron",
+    active: true,
+  })
 );
 console.log(
-  accountniTekshir({ id: 2, login: "vali456", password: "abcd", active: false })
+  checkAccount({
+    id: 2,
+    login: "nosir456",
+    password: "ko'katmen",
+    active: false,
+  })
 );
 
-// MASHQ 10: Menyudagi taomlar
-type TaomTuri = "milliy" | "yevropa" | "osiyo";
+// MASHQ 10
 
-type Taom = {
+type MealList = "milliy" | "yevropa" | "osiyo";
+
+type Meal = {
   nomi: string;
   narxi: number;
-  turi: TaomTuri;
+  turi: MealList;
 };
 
-const taomlarRoyxati: Taom[] = [
+const foodList: Meal[] = [
   { nomi: "Osh", narxi: 25000, turi: "milliy" },
   { nomi: "Pizza", narxi: 45000, turi: "yevropa" },
   { nomi: "Sushi", narxi: 60000, turi: "osiyo" },
 ];
 
-function taomlarniFiltr(taomlar: Taom[], turi: TaomTuri): Taom[] {
+function taomlarniFiltr(taomlar: Meal[], turi: MealList): Meal[] {
   return taomlar.filter((taom) => taom.turi === turi);
 }
-console.log("MASHQ 10:");
-console.log("Milliy taomlar:", taomlarniFiltr(taomlarRoyxati, "milliy"));
-console.log("Yevropa taomlar:", taomlarniFiltr(taomlarRoyxati, "yevropa"));
-console.log("Osiyo taomlari:", taomlarniFiltr(taomlarRoyxati, "osiyo"));
+console.log("Milliy taomlar:", taomlarniFiltr(foodList, "milliy"));
+console.log("Yevropa taomlar:", taomlarniFiltr(foodList, "yevropa"));
+console.log("Osiyo taomlari:", taomlarniFiltr(foodList, "osiyo"));
